@@ -1,11 +1,12 @@
 import { AuthenticationError, PromiseReturnType } from "blitz"
 import Link from "next/link"
-import { LabeledTextField } from "app/core/components/LabeledTextField"
-import { Form, FORM_ERROR } from "app/core/components/Form"
+import { Form, FORM_ERROR } from "app/projects/components/Login/Form"
 import login from "app/auth/mutations/login"
 import { Login } from "app/auth/validations"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes } from "@blitzjs/next"
+import { LoginWrapper } from "app/projects/components/Login/styles"
+import LabeledTextField from "app/projects/components/Login/LabeledTextField"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
@@ -14,7 +15,7 @@ type LoginFormProps = {
 export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
   return (
-    <div>
+    <LoginWrapper>
       <h1>Login</h1>
 
       <Form
@@ -22,6 +23,7 @@ export const LoginForm = (props: LoginFormProps) => {
         schema={Login}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
+          console.log(values)
           try {
             const user = await loginMutation(values)
             props.onSuccess?.(user)
@@ -52,7 +54,7 @@ export const LoginForm = (props: LoginFormProps) => {
           <a>Sign Up</a>
         </Link>
       </div>
-    </div>
+    </LoginWrapper>
   )
 }
 
