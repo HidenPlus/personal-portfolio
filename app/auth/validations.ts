@@ -1,3 +1,4 @@
+import getLocaleString from "app/core/languages/getLocaleString"
 import { z } from "zod"
 
 export const email = z
@@ -17,8 +18,8 @@ export const Signup = z.object({
 })
 
 export const Login = z.object({
-  email,
-  password: z.string(),
+  email: z.string().email({ message: getLocaleString("errorInvalidEmail") }),
+  password: z.string().min(6, { message: getLocaleString("errorInvalidPassword") }),
 })
 
 export const ForgotPassword = z.object({

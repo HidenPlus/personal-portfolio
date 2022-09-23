@@ -11,6 +11,7 @@ type Props = {
 }
 
 const LayoutWrapper = styled.div`
+  width: 100%;
   padding-top: calc(var(--nav-height) + 2rem);
 `
 

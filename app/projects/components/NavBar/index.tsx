@@ -23,6 +23,11 @@ const tempItems = [
     title: 'Home',
     url: '/',
   },
+  {
+    id: 5,
+    title: 'Login',
+    url: '/auth',
+  },
 ]
 
 export default function NavBar(): JSX.Element {

@@ -11,7 +11,9 @@ const stylesUrl = [
   'http://fonts.cdnfonts.com/css/calibre'
 ]
 
-class MyDocument extends Document {
+class MyDocument extends Document<{
+  styleTags: any
+}> {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
     const sheet = new ServerStyleSheet();

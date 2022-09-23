@@ -5,6 +5,7 @@ type Props = {
     name: string
     placeholder: string
     type?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function LabeledTextField({
@@ -12,10 +13,11 @@ export default function LabeledTextField({
     name,
     placeholder,
     type = "text",
+    onChange,
 }: Props): JSX.Element {
   return (
     <LabeledTextFieldWrapper>
-      <Input name={name} placeholder={placeholder} type={type} />
+      <Input autoComplete="new-password" onChange={onChange} name={name} placeholder={placeholder} type={type} />
       <label htmlFor={name}>{label}</label>
     </LabeledTextFieldWrapper>
   )

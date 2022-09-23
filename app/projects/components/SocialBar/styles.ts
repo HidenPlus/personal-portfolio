@@ -21,7 +21,7 @@ export const SideBarList = styled.ul`
   &::after {
     content: "";
     display: block;
-    width: 1px;
+    width: 2px;
     height: 90px;
     margin: 0px auto;
     background-color: var(--light-slate);

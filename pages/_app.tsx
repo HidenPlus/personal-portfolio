@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react"
 import { withBlitz } from "app/blitz-client"
 import { GlobalStyles, PageWrapper } from "app/projects/components/Html/styles"
 import NavBar from "app/projects/components/NavBar"
+import NavBarAdmin from "app/auth/components/NavBarAdmin"
 import SocialBar from "app/projects/components/SocialBar"
 import EmailBar from "app/projects/components/EmailBar"
 import { AnimatePresence } from "framer-motion"
 import { useWindowSize } from "app/core/hooks/useWindowSize"
+import { useRouter } from "next/router"
+import NavBarAuth from "app/auth/components/NavBarAuth"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -33,6 +36,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   const windowSize = useWindowSize();
   const [showChild, setShowChild] = useState(false);
   const [itsMobile, setItsMobile] = useState(false);
+  const [itsAdmin, setItsAdmin] = useState(false);
+  const {locale, ...router} = useRouter();
+
+  useEffect(() => {
+    if(router.pathname === "/auth"){
+      setItsAdmin(true);
+    }else{
+      setItsAdmin(false);
+    }
+  }, [router.pathname])
+
+  useEffect(() => {
+    console.log({locale})
+    window.localStorage.setItem("locale", locale || "en");
+  }, [])
 
   useEffect(() => {
     if(!windowSize?.width) return;
@@ -53,6 +71,21 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (typeof window === 'undefined') {
     return <></>;
+  }
+
+  if(itsAdmin) {
+    return (
+      <ErrorBoundary FallbackComponent={RootErrorFallback}>
+        <GlobalStyles />
+        <NavBarAdmin />
+        <PageWrapper>
+        <NavBarAuth />
+        <AnimatePresence mode="wait" >
+            <Component {...pageProps} />
+        </AnimatePresence>
+        </PageWrapper>
+      </ErrorBoundary>
+    )
   }
 
   if(itsMobile){

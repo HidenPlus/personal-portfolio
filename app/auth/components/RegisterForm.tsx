@@ -17,13 +17,14 @@ import { ImCross } from "react-icons/im";
 import { useGetTextByLng } from "app/core/hooks/useGetTextByLng"
 import LoaderSpinner, { Colors } from "app/core/components/LoaderSpinner"
 import { useRouter } from "next/router"
+import signup from "../mutations/signup"
 
-type LoginFormProps = {
-  onSuccess?: (user: PromiseReturnType<typeof login>) => void
+type RegisterFormProps = {
+  onSuccess?: (user: PromiseReturnType<typeof signup>) => void
   onError?: (error: any) => void
 }
 
-export const LoginForm = (props: LoginFormProps) => {
+export const RegisterForm = (props: RegisterFormProps) => {
   const translations = {
     login: useGetTextByLng("authLogin"),
     email: useGetTextByLng("authEmail"),
@@ -34,7 +35,7 @@ export const LoginForm = (props: LoginFormProps) => {
     emailInvalid: useGetTextByLng("errorInvalidEmail"),
     passwordInvalid: useGetTextByLng("errorInvalidPassword"),
   }
-  const [loginMutation, {isLoading: loadingLogin}] = useMutation(login)
+  const [signupMutation, {isLoading: loadingLogin}] = useMutation(signup)
   const router = useRouter()
   const [validForm, setValidForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -80,7 +81,7 @@ export const LoginForm = (props: LoginFormProps) => {
     try {
       const userSanitized = Login.parse(loginForm)
       console.log(userSanitized)
-      const user = await loginMutation(userSanitized)
+      const user = await signupMutation(userSanitized)
       console.log(user)
       props.onSuccess?.(user)
     } catch (error: any) {
@@ -123,8 +124,8 @@ export const LoginForm = (props: LoginFormProps) => {
         </motion.div>
       </ErrorChecker>
       <FormTitleWrapper>
-        <LoginTitle>{translations.login}</LoginTitle>
-        <SignUpTitle onClick={() => router.push("/auth/signup")}>{translations.signup}</SignUpTitle>
+        <SignUpTitle onClick={() => router.push("/auth/login")}>{translations.login}</SignUpTitle>
+        <LoginTitle>{translations.signup}</LoginTitle>
       </FormTitleWrapper>
       <Form>
         <LabeledTextField onChange={handleChangeInput} name="email" label={translations.email} placeholder={translations.email} />
@@ -135,7 +136,7 @@ export const LoginForm = (props: LoginFormProps) => {
           transition={{ duration: 0.7 }}
           >
           {!loadingLogin ?
-          <LoginButton role="button" onClick={handleLogin}>{translations.login}</LoginButton>
+          <LoginButton role="button" onClick={handleLogin}>{translations.signup}</LoginButton>
           :
           <LoaderSpinner color={Colors.white}></LoaderSpinner>}
         </LoginButtonWrapper>
@@ -144,4 +145,4 @@ export const LoginForm = (props: LoginFormProps) => {
   )
 }
 
-export default LoginForm
+export default RegisterForm

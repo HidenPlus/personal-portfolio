@@ -9,7 +9,8 @@ export const authenticateUser = async (rawEmail: string, rawPassword: string) =>
   const { email, password } = Login.parse({ email: rawEmail, password: rawPassword })
   const user = await db.user.findFirst({ where: { email } })
   if (!user) throw new AuthenticationError()
-
+  console.log(user)
+  if(!user.active) throw new AuthenticationError("User is not active")
   const result = await SecurePassword.verify(user.hashedPassword, password)
 
   if (result === SecurePassword.VALID_NEEDS_REHASH) {

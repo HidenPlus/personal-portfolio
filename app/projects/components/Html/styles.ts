@@ -14,7 +14,11 @@ export const GlobalStyles = createGlobalStyle`
       --lightest-slate: #ccd6f6;
       --white: #e6f1ff;
       --green: #64ffda;
+      --dark-green: #0f574e;
+      --red: #ff6480;
+      --dark-red: #570f0e;
       --green-tint: rgba(100,255,218,0.1);
+      --red-tint: rgba(255,100,100,0.1);
       --pink: #f57dff;
       --blue: #57cbff;
       --font-sans: 'Calibre','Inter',-apple-system,system-ui,sans-serif;
