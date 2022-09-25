@@ -27,7 +27,7 @@ export function MenusList() {
         {menus.map((menu) => (
           <li key={menu.id}>
             <Link href={Routes.ShowMenuPage({ menuId: menu.id })}>
-              <a>{menu.name}</a>
+              <a>{menu.title}</a>
             </Link>
           </li>
         ))}
