@@ -12,6 +12,6 @@ function AuthUsersPage() {
   )
 }
 
-AdminPage.authenticate = { redirectTo: "/auth/login" }
+AuthUsersPage.authenticate = { redirectTo: "/auth/login" }
 
-export default AdminPage
+export default AuthUsersPage
