@@ -6,7 +6,7 @@ export { FORM_ERROR } from "app/core/components/Form"
 
 export function ProjectForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (
-    <Form<S> {...props}>
+    <Form {...props}>
       <TextField name="name" label="Name" placeholder="Name" />
     </Form>
   )
