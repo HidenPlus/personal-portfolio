@@ -2,7 +2,6 @@ import { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import { z } from "zod"
 import { validateZodSchema } from "blitz"
-import { Form as FormStyled } from "./styles"
 export { FORM_ERROR } from "final-form"
 
 export interface FormProps<S extends z.ZodType<any, any>>
@@ -30,7 +29,7 @@ export function Form<S extends z.ZodType<any, any>>({
       validate={validateZodSchema(schema)}
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, submitError }) => (
-        <FormStyled onSubmit={handleSubmit} className="form" {...props}>
+        <Form onSubmit={handleSubmit} className="form" {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
 
@@ -45,7 +44,7 @@ export function Form<S extends z.ZodType<any, any>>({
               {submitText}
             </button>
           )}
-        </FormStyled>
+        </Form>
       )}
     />
   )
