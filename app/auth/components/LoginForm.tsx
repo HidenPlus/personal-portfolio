@@ -89,6 +89,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
       const user = await loginMutation(userSanitized)
       props.onSuccess?.(user)
     } catch (error: any) {
+      console.log(error)
       if (error instanceof AuthenticationError) {
         return props.onError?.({
           [FORM_ERROR]: error.message || "Sorry, those credentials are invalid",
