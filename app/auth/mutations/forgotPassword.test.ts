@@ -1,8 +1,8 @@
 import db from "db"
 import { hash256 } from "@blitzjs/auth"
-import forgotPassword from "./forgotPassword"
 import previewEmail from "preview-email"
 import { Ctx } from "@blitzjs/next"
+import forgotPassword from "./forgotPassword"
 
 beforeEach(async () => {
   await db.$reset()
@@ -43,8 +43,12 @@ describe("forgotPassword mutation", () => {
 
     const tokens = await db.token.findMany({ where: { userId: user.id } })
     const token = tokens[0]
-    if (!user.tokens[0]) throw new Error("Missing user token")
-    if (!token) throw new Error("Missing token")
+    if (!user.tokens[0]) {
+      throw new Error("Missing user token")
+    }
+    if (!token) {
+      throw new Error("Missing token")
+    }
 
     // delete's existing tokens
     expect(tokens.length).toBe(1)

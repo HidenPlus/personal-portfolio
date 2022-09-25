@@ -1,19 +1,19 @@
-import { Suspense } from "react";
-import { Routes } from "@blitzjs/next";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@blitzjs/rpc";
-import { useParam } from "@blitzjs/next";
+/* eslint-disable consistent-return */
+import { Suspense } from "react"
+import { Routes, useParam } from "@blitzjs/next"
+import Head from "next/head"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useQuery, useMutation } from "@blitzjs/rpc"
 
-import Layout from "app/core/layouts/Layout";
-import getMenu from "app/menus/queries/getMenu";
-import updateMenu from "app/menus/mutations/updateMenu";
-import { MenuForm, FORM_ERROR } from "app/menus/components/MenuForm";
+import Layout from "app/core/layouts/Layout"
+import getMenu from "app/menus/queries/getMenu"
+import updateMenu from "app/menus/mutations/updateMenu"
+import { MenuForm, FORM_ERROR } from "app/menus/components/MenuForm"
 
-export const EditMenu = () => {
-  const router = useRouter();
-  const menuId = useParam("menuId", "number");
+export function EditMenu() {
+  const router = useRouter()
+  const menuId = useParam("menuId", "number")
   const [menu, { setQueryData }] = useQuery(
     getMenu,
     { id: menuId },
@@ -21,8 +21,8 @@ export const EditMenu = () => {
       // This ensures the query never refreshes and overwrites the form data while the user is editing.
       staleTime: Infinity,
     }
-  );
-  const [updateMenuMutation] = useMutation(updateMenu);
+  )
+  const [updateMenuMutation] = useMutation(updateMenu)
 
   return (
     <>
@@ -46,23 +46,23 @@ export const EditMenu = () => {
               const updated = await updateMenuMutation({
                 id: menu.id,
                 ...values,
-              });
-              await setQueryData(updated);
-              router.push(Routes.ShowMenuPage({ menuId: updated.id }));
+              })
+              await setQueryData(updated)
+              router.push(Routes.ShowMenuPage({ menuId: updated.id }))
             } catch (error: any) {
-              console.error(error);
+              console.error(error)
               return {
                 [FORM_ERROR]: error.toString(),
-              };
+              }
             }
           }}
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-const EditMenuPage = () => {
+function EditMenuPage() {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
@@ -75,10 +75,10 @@ const EditMenuPage = () => {
         </Link>
       </p>
     </div>
-  );
-};
+  )
+}
 
-EditMenuPage.authenticate = true;
-EditMenuPage.getLayout = (page) => <Layout>{page}</Layout>;
+EditMenuPage.authenticate = true
+EditMenuPage.getLayout = (page) => <Layout>{page}</Layout>
 
-export default EditMenuPage;
+export default EditMenuPage

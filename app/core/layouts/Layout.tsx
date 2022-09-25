@@ -1,21 +1,20 @@
 import Head from "next/head"
-import React, { FC } from "react"
+import React from "react"
 import { BlitzLayout } from "@blitzjs/next"
 
+// eslint-disable-next-line react/function-component-definition
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
   children,
-}) => {
-  return (
-    <>
-      <Head>
-        <title>{title || "portfolioYojhanAtuesta"}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+}) => (
+  <>
+    <Head>
+      <title>{title || "portfolioYojhanAtuesta"}</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
 
-      {children}
-    </>
-  )
-}
+    {children}
+  </>
+)
 
 export default Layout

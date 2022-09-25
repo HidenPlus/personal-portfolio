@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Routes } from "@blitzjs/next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMutation } from "@blitzjs/rpc";
-import Layout from "app/core/layouts/Layout";
-import createProject from "app/projects/mutations/createProject";
-import { ProjectForm, FORM_ERROR } from "app/projects/components/ProjectForm/ProjectForm";
+import { Routes } from "@blitzjs/next"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useMutation } from "@blitzjs/rpc"
+import Layout from "app/core/layouts/Layout"
+import createProject from "app/projects/mutations/createProject"
+import { ProjectForm, FORM_ERROR } from "app/projects/components/ProjectForm/ProjectForm"
 
-const NewProjectPage = () => {
-  const router = useRouter();
-  const [createProjectMutation] = useMutation(createProject);
+function NewProjectPage() {
+  const router = useRouter()
+  const [createProjectMutation] = useMutation(createProject)
 
   return (
-    <Layout title={"Create New Project"}>
+    <Layout title="Create New Project">
       <h1>Create New Project</h1>
 
       <ProjectForm
@@ -24,13 +24,13 @@ const NewProjectPage = () => {
         // initialValues={{}}
         onSubmit={async (values) => {
           try {
-            const project = await createProjectMutation(values);
-            router.push(Routes.ShowProjectPage({ projectId: project.id }));
+            const project = await createProjectMutation(values)
+            router.push(Routes.ShowProjectPage({ projectId: project.id }))
           } catch (error: any) {
-            console.error(error);
+            console.error(error)
             return {
               [FORM_ERROR]: error.toString(),
-            };
+            }
           }
         }}
       />
@@ -41,9 +41,9 @@ const NewProjectPage = () => {
         </Link>
       </p>
     </Layout>
-  );
-};
+  )
+}
 
-NewProjectPage.authenticate = true;
+NewProjectPage.authenticate = true
 
-export default NewProjectPage;
+export default NewProjectPage

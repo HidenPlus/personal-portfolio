@@ -1,3 +1,6 @@
+/* eslint-disable react/function-component-definition */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable consistent-return */
 import Layout from "app/core/layouts/Layout"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"

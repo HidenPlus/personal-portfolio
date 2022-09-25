@@ -15,18 +15,20 @@ export default function Dashboard(): JSX.Element {
   const [logoutMutation] = useMutation(logout)
 
   useEffect(() => {
-    if(!!!session.userId) {
+    if (!session.userId) {
       router.push("/auth/login")
     }
-  }, [session]);
+  }, [session])
 
   return (
     <DashboardLayout>
       <h1>{translations.users}</h1>
-      <button onClick={async () => {
-        await logoutMutation();
-        router.replace("/auth/login")
-      }}>
+      <button
+        onClick={async () => {
+          await logoutMutation()
+          router.replace("/auth/login")
+        }}
+      >
         Logout
       </button>
     </DashboardLayout>

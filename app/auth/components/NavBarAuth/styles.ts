@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const SideNavBar = styled.nav`
   position: fixed;
@@ -12,7 +12,7 @@ export const SideNavBar = styled.nav`
   min-width: 300px;
   background-color: var(--color-primary);
   margin-right: 40px;
-`;
+`
 
 export const SideNavBarLogo = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const SideNavBarLogo = styled.div`
   font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 600;
-`;
+`
 
 export const SideNavBarNav = styled.ul`
   display: flex;
@@ -58,4 +58,4 @@ export const NavBarItem = styled.li`
 export const NavBarText = styled.span`
   margin-left: 40px;
   min-width: 100px;
-`;
+`

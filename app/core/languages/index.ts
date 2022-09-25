@@ -1,4 +1,4 @@
-import { en } from "./en";
-import { es } from "./es";
+import { en } from "./en"
+import { es } from "./es"
 
-export default {es, en} as const;
+export default { es, en } as const

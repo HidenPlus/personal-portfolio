@@ -1,17 +1,18 @@
-import { Routes } from "@blitzjs/next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMutation } from "@blitzjs/rpc";
-import Layout from "app/core/layouts/Layout";
-import createMenu from "app/menus/mutations/createMenu";
-import { MenuForm, FORM_ERROR } from "app/menus/components/MenuForm";
+/* eslint-disable consistent-return */
+import { Routes } from "@blitzjs/next"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useMutation } from "@blitzjs/rpc"
+import Layout from "app/core/layouts/Layout"
+import createMenu from "app/menus/mutations/createMenu"
+import { MenuForm, FORM_ERROR } from "app/menus/components/MenuForm"
 
-const NewMenuPage = () => {
-  const router = useRouter();
-  const [createMenuMutation] = useMutation(createMenu);
+function NewMenuPage() {
+  const router = useRouter()
+  const [createMenuMutation] = useMutation(createMenu)
 
   return (
-    <Layout title={"Create New Menu"}>
+    <Layout title="Create New Menu">
       <h1>Create New Menu</h1>
 
       <MenuForm
@@ -23,13 +24,13 @@ const NewMenuPage = () => {
         // initialValues={{}}
         onSubmit={async (values) => {
           try {
-            const menu = await createMenuMutation(values);
-            router.push(Routes.ShowMenuPage({ menuId: menu.id }));
+            const menu = await createMenuMutation(values)
+            router.push(Routes.ShowMenuPage({ menuId: menu.id }))
           } catch (error: any) {
-            console.error(error);
+            console.error(error)
             return {
               [FORM_ERROR]: error.toString(),
-            };
+            }
           }
         }}
       />
@@ -40,9 +41,9 @@ const NewMenuPage = () => {
         </Link>
       </p>
     </Layout>
-  );
-};
+  )
+}
 
-NewMenuPage.authenticate = true;
+NewMenuPage.authenticate = true
 
-export default NewMenuPage;
+export default NewMenuPage

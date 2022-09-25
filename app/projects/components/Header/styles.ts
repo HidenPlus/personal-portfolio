@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const Title = styled.h1`
-  font-size: clamp(var(--fz-sm),5vw,var(--fz-md));
+  font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
   font-weight: 400;
   margin: 0px 0px 30px 4px;
   color: var(--green);
   font-family: var(--font-mono);
-`;
+`
 
 export const Name = styled.h2`
   font-size: clamp(40px, 8vw, 80px);
@@ -16,10 +16,10 @@ export const Name = styled.h2`
   line-height: 1.1;
   margin: 0;
   &::after {
-    content: '';
+    content: "";
     display: inline-block;
     width: 3px;
-    height: .8em;
+    height: 0.8em;
     margin-left: 5px;
     position: absolute;
     background-color: var(--lightest-slate);
@@ -36,7 +36,7 @@ export const Name = styled.h2`
       opacity: 0;
     }
   }
-`;
+`
 
 export const Presentation = styled.h3`
   color: var(--slate);
@@ -46,7 +46,7 @@ export const Presentation = styled.h3`
   margin: 0;
   margin-top: 10px;
   max-width: 900px;
-`;
+`
 
 export const Description = styled.p`
   color: var(--slate);
@@ -56,7 +56,7 @@ export const Description = styled.p`
   margin: 20px 0px 0px;
   max-width: 540px;
   display: inline-block;
-`;
+`
 
 export const CompanyUrl = styled.a`
   display: inline-block;
@@ -79,4 +79,4 @@ export const CompanyUrl = styled.a`
   &:hover&::after{ {
     width: 100%;
   }
-`;
+`

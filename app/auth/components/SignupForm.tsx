@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import signup from "app/auth/mutations/signup"
@@ -8,7 +9,7 @@ type SignupFormProps = {
   onSuccess?: () => void
 }
 
-export const SignupForm = (props: SignupFormProps) => {
+export function SignupForm({ ...props }: SignupFormProps) {
   const [signupMutation] = useMutation(signup)
   return (
     <div>
@@ -26,9 +27,8 @@ export const SignupForm = (props: SignupFormProps) => {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
               // This error comes from Prisma
               return { email: "This email is already being used" }
-            } else {
-              return { [FORM_ERROR]: error.toString() }
             }
+            return { [FORM_ERROR]: error.toString() }
           }
         }}
       >

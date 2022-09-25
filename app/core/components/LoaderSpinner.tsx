@@ -6,14 +6,14 @@ export enum Colors {
   white = "var(--white)",
 }
 
-const StyledSpinner = styled.svg<{color: Colors}>`
+const StyledSpinner = styled.svg<{ color: Colors }>`
   animation: rotate 2s linear infinite;
   margin: -25px 0 0 -25px;
   width: 50px;
   height: 50px;
 
   & .path {
-    stroke: ${props => props.color};
+    stroke: ${(props) => props.color};
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
@@ -37,19 +37,12 @@ const StyledSpinner = styled.svg<{color: Colors}>`
       stroke-dashoffset: -124;
     }
   }
-`;
+`
 
-export default function LoaderSpinner({color = Colors.primary}: {color: Colors}) {
+export default function LoaderSpinner({ color = Colors.primary }: { color: Colors }) {
   return (
     <StyledSpinner color={color} viewBox="0 0 50 50">
-    <circle
-      className="path"
-      cx="25"
-      cy="25"
-      r="20"
-      fill="none"
-      strokeWidth="4"
-    />
-  </StyledSpinner>
+      <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="4" />
+    </StyledSpinner>
   )
 }

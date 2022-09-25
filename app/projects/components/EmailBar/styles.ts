@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const SideBar = styled.div`
   width: 40px;
@@ -8,7 +8,7 @@ export const SideBar = styled.div`
   left: auto;
   z-index: 10;
   color: var(--light-slate);
-`;
+`
 
 export const StyledLinkWrapper = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ export const StyledLinkWrapper = styled.div`
     margin: 0px auto;
     background-color: var(--light-slate);
   }
-`;
+`
 
 export const StyledLink = styled.a`
   margin: 20px auto;
@@ -35,4 +35,4 @@ export const StyledLink = styled.a`
   letter-spacing: 0.1em;
   writing-mode: vertical-rl;
   text-decoration: none;
-`;
+`

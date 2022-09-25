@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const SideBar = styled.div`
   width: 40px;
@@ -8,7 +8,7 @@ export const SideBar = styled.div`
   right: auto;
   z-index: 10;
   color: var(--light-slate);
-`;
+`
 
 export const SideBarList = styled.ul`
   display: flex;
@@ -26,7 +26,7 @@ export const SideBarList = styled.ul`
     margin: 0px auto;
     background-color: var(--light-slate);
   }
-`;
+`
 
 export const SideBarItem = styled.a`
   display: inline-block;

@@ -1,8 +1,8 @@
-import { FaUser, FaBriefcase, FaWpforms } from "react-icons/fa";
-import { useGetTextByLng } from "app/core/hooks/useGetTextByLng";
-import { NavBarItem, NavBarText, SideNavBar, SideNavBarLogo, SideNavBarNav } from "./styles";
+import { FaUser, FaBriefcase, FaWpforms } from "react-icons/fa"
+import { useGetTextByLng } from "app/core/hooks/useGetTextByLng"
+import { NavBarItem, NavBarText, SideNavBar, SideNavBarLogo, SideNavBarNav } from "./styles"
 
-export default function NavBarAuth(){
+export default function NavBarAuth() {
   const translations = {
     panelTitle: useGetTextByLng("adminTitle"),
     users: useGetTextByLng("adminUsers"),
@@ -12,7 +12,9 @@ export default function NavBarAuth(){
 
   return (
     <SideNavBar>
-      <SideNavBarLogo><span>{translations.panelTitle}</span></SideNavBarLogo>
+      <SideNavBarLogo>
+        <span>{translations.panelTitle}</span>
+      </SideNavBarLogo>
       <SideNavBarNav>
         <NavBarItem>
           <FaUser />

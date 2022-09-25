@@ -1,14 +1,15 @@
+/* eslint-disable consistent-return */
 import Layout from "app/core/layouts/Layout"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import { ResetPassword } from "app/auth/validations"
 import resetPassword from "app/auth/mutations/resetPassword"
-import { BlitzPage, Routes } from "@blitzjs/next"
+import { Routes } from "@blitzjs/next"
 import { useRouter } from "next/router"
 import { useMutation } from "@blitzjs/rpc"
 import Link from "next/link"
 
-const ResetPasswordPage: BlitzPage = () => {
+function ResetPasswordPage() {
   const router = useRouter()
   const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword)
 
@@ -40,10 +41,9 @@ const ResetPasswordPage: BlitzPage = () => {
                 return {
                   [FORM_ERROR]: error.message,
                 }
-              } else {
-                return {
-                  [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-                }
+              }
+              return {
+                [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
               }
             }
           }}

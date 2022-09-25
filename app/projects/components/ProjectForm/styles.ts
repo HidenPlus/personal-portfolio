@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Form } from "app/core/components/Form";
-import { LabeledTextField } from "app/core/components/LabeledTextField";
+import styled from "styled-components"
+import { Form } from "app/core/components/Form"
+import { LabeledTextField } from "app/core/components/LabeledTextField"
 
 export const ProjectForm = styled(Form)`
   display: flex;
@@ -11,8 +11,6 @@ export const ProjectForm = styled(Form)`
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-`;
+`
 
-export const TextField = styled(LabeledTextField)`
-
-`;
+export const TextField = styled(LabeledTextField)``

@@ -10,7 +10,9 @@ export default resolver.pipe(
   resolver.authorize(),
   async ({ currentPassword, newPassword }, ctx) => {
     const user = await db.user.findFirst({ where: { id: ctx.session.userId as number } })
-    if (!user) throw new NotFoundError()
+    if (!user) {
+      throw new NotFoundError()
+    }
 
     try {
       await authenticateUser(user.email, currentPassword)

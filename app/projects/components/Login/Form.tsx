@@ -1,8 +1,8 @@
 import { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
-import { Form as FormStyled } from "./styles"
 import { z } from "zod"
 import { validateZodSchema } from "blitz"
+import { Form as FormStyled } from "./styles"
 export { FORM_ERROR } from "final-form"
 
 export interface FormProps<S extends z.ZodType<any, any>>

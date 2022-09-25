@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const ContactTitle = styled.h2`
   margin: 0px 0px 40px;
@@ -7,7 +7,7 @@ export const ContactTitle = styled.h2`
   line-height: 1.1;
   font-size: clamp(40px, 5vw, 60px);
   text-align: center;
-`;
+`
 
 export const ContactDescription = styled.p`
   margin: 0px 0px 40px;
@@ -15,7 +15,7 @@ export const ContactDescription = styled.p`
   font-size: var(--fz-md);
   max-width: 500px;
   text-align: center;
-`;
+`
 
 export const ArrowImg = styled.img`
   width: 200px;

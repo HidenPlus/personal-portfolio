@@ -1,20 +1,19 @@
-import { Suspense } from "react";
-import { Routes } from "@blitzjs/next";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@blitzjs/rpc";
-import { useParam } from "@blitzjs/next";
+import { Suspense } from "react"
+import { Routes, useParam } from "@blitzjs/next"
+import Head from "next/head"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useQuery, useMutation } from "@blitzjs/rpc"
 
-import Layout from "app/core/layouts/Layout";
-import getMenu from "app/menus/queries/getMenu";
-import deleteMenu from "app/menus/mutations/deleteMenu";
+import Layout from "app/core/layouts/Layout"
+import getMenu from "app/menus/queries/getMenu"
+import deleteMenu from "app/menus/mutations/deleteMenu"
 
-export const Menu = () => {
-  const router = useRouter();
-  const menuId = useParam("menuId", "number");
-  const [deleteMenuMutation] = useMutation(deleteMenu);
-  const [menu] = useQuery(getMenu, { id: menuId });
+export function Menu() {
+  const router = useRouter()
+  const menuId = useParam("menuId", "number")
+  const [deleteMenuMutation] = useMutation(deleteMenu)
+  const [menu] = useQuery(getMenu, { id: menuId })
 
   return (
     <>
@@ -34,8 +33,8 @@ export const Menu = () => {
           type="button"
           onClick={async () => {
             if (window.confirm("This will be deleted")) {
-              await deleteMenuMutation({ id: menu.id });
-              router.push(Routes.MenusPage());
+              await deleteMenuMutation({ id: menu.id })
+              router.push(Routes.MenusPage())
             }
           }}
           style={{ marginLeft: "0.5rem" }}
@@ -44,10 +43,10 @@ export const Menu = () => {
         </button>
       </div>
     </>
-  );
-};
+  )
+}
 
-const ShowMenuPage = () => {
+function ShowMenuPage() {
   return (
     <div>
       <p>
@@ -60,10 +59,10 @@ const ShowMenuPage = () => {
         <Menu />
       </Suspense>
     </div>
-  );
-};
+  )
+}
 
-ShowMenuPage.authenticate = true;
-ShowMenuPage.getLayout = (page) => <Layout>{page}</Layout>;
+ShowMenuPage.authenticate = true
+ShowMenuPage.getLayout = (page) => <Layout>{page}</Layout>
 
-export default ShowMenuPage;
+export default ShowMenuPage

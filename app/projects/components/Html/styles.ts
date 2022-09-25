@@ -1,5 +1,5 @@
 // eslint-disable-next-line @next/next/no-document-import-in-page
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components"
 
 export const GlobalStyles = createGlobalStyle`
     * {

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const DashboardLayout = styled.section`
   display: flex;
@@ -9,4 +9,4 @@ export const DashboardLayout = styled.section`
   margin-left: 400px;
   height: 100vh;
   margin-top: var(--nav-height);
-`;
+`

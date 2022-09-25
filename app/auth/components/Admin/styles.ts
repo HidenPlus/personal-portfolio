@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const UsersLayout = styled.section`
   display: flex;
@@ -7,4 +7,4 @@ export const UsersLayout = styled.section`
   align-items: flex-start;
   width: calc(100vw - 340px);
   height: 100vh;
-`;
+`

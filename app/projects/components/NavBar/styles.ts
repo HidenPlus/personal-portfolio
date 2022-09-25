@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const NavBar = styled.nav`
   color: var(--lightest-slate);
@@ -21,7 +21,7 @@ export const NavBar = styled.nav`
   user-select: auto !important;
   backdrop-filter: blur(10px);
   transition: var(--transition);
-`;
+`
 
 export const NavList = styled.ol`
   display: flex;
@@ -71,7 +71,7 @@ export const ResumeButton = styled.a`
   transition: var(--transition);
   margin-left: 15px;
   font-size: var(--fz-xs);
-  &:hover{
+  &:hover {
     background-color: rgba(100, 255, 218, 0.1);
   }
 `
