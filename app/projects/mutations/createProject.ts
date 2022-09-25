@@ -3,7 +3,12 @@ import db from "db"
 import { z } from "zod"
 
 const CreateProject = z.object({
-  name: z.string(),
+  title: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  description: z.string(),
+  authorId: z.number(),
+  url: z.string(),
 })
 
 export default resolver.pipe(resolver.zod(CreateProject), resolver.authorize(), async (input) => {
