@@ -40,7 +40,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     emailInvalid: useGetTextByLng("errorInvalidEmail"),
     passwordInvalid: useGetTextByLng("errorInvalidPassword"),
   }
-  const [loginMutation, { isLoading: loadingLogin, error: errorMutation }] = useMutation(login)
+  const [loginMutation, { isLoading: loadingLogin }] = useMutation(login)
   const router = useRouter()
   const [validForm, setValidForm] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -86,11 +86,9 @@ export function LoginForm({ ...props }: LoginFormProps) {
   const handleLogin = async (): Promise<any> => {
     try {
       const userSanitized = Login.parse(loginForm)
-      console.log(userSanitized)
       const user = await loginMutation(userSanitized)
       props.onSuccess?.(user)
     } catch (error: any) {
-      console.log({ error, errorMutation })
       if (error instanceof AuthenticationError) {
         return props.onError?.({
           [FORM_ERROR]: error.message || "Sorry, those credentials are invalid",
