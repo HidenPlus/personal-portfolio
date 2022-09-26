@@ -17,4 +17,4 @@ jobs:
         with:
           install: npm install
           build: npm run build
-          start: npm run test:prod
+          start: npm run cy:ci

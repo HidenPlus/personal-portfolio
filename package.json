@@ -13,7 +13,7 @@
 		"prepare": "husky install",
 		"cy:open": "cypress open",
 		"cy:run": "cypress run --record --key f855312a-5857-4c1a-9c14-cff16ff86739 --parallel",
-		"cy:ci": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https-get://localhost:3030 cy:run"
+		"cy:ci": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https-get://localhost:3000 cy:run"
 	},
 	"prisma": {
 		"schema": "db/schema.prisma"
