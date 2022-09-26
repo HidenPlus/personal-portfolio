@@ -36,20 +36,22 @@ export const SideNavBarNav = styled.ul`
   height: 100%;
   list-style: none;
   gap: 20px;
+  padding: 0;
 `
 
-export const NavBarItem = styled.li`
+export const NavBarItem = styled.li<{ active: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 40px;
+  height: 50px;
   color: var(--white);
   font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  background-color: ${({ active }) => (active ? "var(--color-secondary)" : "none")};
   &:hover {
     background-color: var(--color-secondary);
   }

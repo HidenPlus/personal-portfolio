@@ -40,7 +40,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { locale, ...router } = useRouter()
 
   useEffect(() => {
-    if (router.pathname === "/auth") {
+    if (
+      router.pathname.includes("/auth") &&
+      !router.pathname.includes("/login") &&
+      !router.pathname.includes("/signup")
+    ) {
       setItsAdmin(true)
     } else {
       setItsAdmin(false)
@@ -48,7 +52,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.pathname])
 
   useEffect(() => {
-    console.log({ locale })
     window.localStorage.setItem("locale", locale || "en")
   }, [])
 

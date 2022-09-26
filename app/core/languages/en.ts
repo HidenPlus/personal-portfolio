@@ -51,4 +51,9 @@ export const en = {
   adminBlogDeleteConfirmation: "Are you sure you want to delete this post?",
   adminBlogDeleteConfirmationYes: "Yes",
   adminBlogDeleteConfirmationNo: "No",
+  // users
+  name: "Name",
+  email: "Email",
+  role: "Role",
+  active: "Active",
 }

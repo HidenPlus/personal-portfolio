@@ -55,4 +55,9 @@ export const es = {
   adminBlogDeleteConfirmationDescription: "Se eliminará la entrada seleccionada",
   adminBlogDeleteConfirmationSuccess: "Entrada eliminada correctamente",
   adminBlogDeleteConfirmationError: "Error al eliminar la entrada",
+  // users
+  name: "Nombre",
+  email: "Correo electrónico",
+  role: "Rol",
+  active: "Activo",
 }
