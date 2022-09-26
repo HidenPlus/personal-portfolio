@@ -8,10 +8,11 @@ import { Login } from "../validations"
 export const authenticateUser = async (rawEmail: string, rawPassword: string) => {
   const { email, password } = Login.parse({ email: rawEmail, password: rawPassword })
   const user = await db.user.findFirst({ where: { email } })
+  console.log("authenticateUser", user)
   if (!user) {
     throw new AuthenticationError()
   }
-  console.log(user)
+  console.log({ user })
   if (!user.active) {
     throw new AuthenticationError("User is not active")
   }
@@ -22,7 +23,7 @@ export const authenticateUser = async (rawEmail: string, rawPassword: string) =>
     const improvedHash = await SecurePassword.hash(password)
     await db.user.update({ where: { id: user.id }, data: { hashedPassword: improvedHash } })
   }
-
+  console.log("finished authenticateUser", user)
   const { hashedPassword, ...rest } = user
   return rest
 }
@@ -30,7 +31,7 @@ export const authenticateUser = async (rawEmail: string, rawPassword: string) =>
 export default resolver.pipe(resolver.zod(Login), async ({ email, password }, ctx) => {
   // This throws an error if credentials are invalid
   const user = await authenticateUser(email, password)
-
+  console.log("login", user)
   await ctx.session.$create({ userId: user.id, role: user.role as Role })
 
   return user
