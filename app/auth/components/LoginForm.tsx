@@ -86,6 +86,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
   const handleLogin = async (): Promise<any> => {
     try {
       const userSanitized = Login.parse(loginForm)
+      console.log(userSanitized)
       const user = await loginMutation(userSanitized)
       props.onSuccess?.(user)
     } catch (error: any) {
