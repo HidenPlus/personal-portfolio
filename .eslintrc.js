@@ -4,19 +4,22 @@ module.exports = {
   env: {
     node: true,
     es6: true,
+    "cypress/globals": true,
   },
   parserOptions: {
     ecmaVersion: 8, // to enable features such as async/await
   },
   ignorePatterns: ["node_modules/*", ".next/*", ".out/*"],
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "cypress"],
   overrides: [
     // This configuration will apply only to TypeScript files
     {
       files: ["**/*.ts", "**/*.tsx"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
-        project: "./tsconfig.json",
+        sourceType: 'module',
+        project: 'tsconfig.eslint.json',
+        tsconfigRootDir: './',
       },
       settings: {
         react: {
@@ -43,7 +46,7 @@ module.exports = {
         "plugin:prettier/recommended", // Prettier plugin
         "prettier",
       ],
-      plugins: ["import"],
+      plugins: ["import", "cypress"],
       rules: {
         "prettier/prettier": ["error", { endOfLine: "auto" }, { usePrettierrc: true }], // Includes .prettierrc.js rules
         "arrow-body-style": [2, "as-needed"],
