@@ -26,7 +26,7 @@ const tempItems = [
   {
     id: 5,
     title: "Login",
-    url: "/auth",
+    url: "/auth/login",
   },
 ]
 

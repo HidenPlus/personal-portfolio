@@ -86,3 +86,11 @@ export const TableHeaderData = styled.th`
   padding: 10px;
   border-radius: 6px;
 `
+
+export const OrderButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`

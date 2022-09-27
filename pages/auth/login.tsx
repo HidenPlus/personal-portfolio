@@ -27,7 +27,7 @@ function LoginPage(): JSX.Element {
                 },
               },
             ],
-            timeout: 5000,
+            timeout: 200000000,
             type: "error",
           })
         }}

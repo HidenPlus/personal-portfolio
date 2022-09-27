@@ -40,6 +40,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     emailInvalid: useGetTextByLng("errorInvalidEmail"),
     passwordInvalid: useGetTextByLng("errorInvalidPassword"),
     errorAuth: useGetTextByLng("errorAuth"),
+    userInactive: useGetTextByLng("errorUserInactive"),
   }
   const [loginMutation, { isLoading: loadingLogin }] = useMutation(login)
   const router = useRouter()
@@ -90,9 +91,11 @@ export function LoginForm({ ...props }: LoginFormProps) {
       const user = await loginMutation(userSanitized)
       props.onSuccess?.(user)
     } catch (error: any) {
+      console.log(error)
       if (error instanceof AuthenticationError) {
         return props.onError?.({
-          [FORM_ERROR]: translations.errorAuth,
+          [FORM_ERROR]:
+            error.statusCode === 401 ? translations.userInactive : translations.errorAuth,
         })
       }
       if (error instanceof ZodError) {

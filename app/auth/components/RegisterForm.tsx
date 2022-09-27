@@ -145,6 +145,7 @@ export function RegisterForm({ ...props }: RegisterFormProps) {
           name="email"
           label={translations.email}
           placeholder={translations.email}
+          type="email"
         />
         <LabeledTextField
           onChange={handleChangeInput}

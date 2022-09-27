@@ -2,10 +2,10 @@ import { useGetTextByLng } from "app/core/hooks/useGetTextByLng"
 import { BiDownArrow, BiUpArrow } from "react-icons/bi"
 import { useEffect, useState } from "react"
 import { useMutation, useQuery } from "@blitzjs/rpc"
-import Switch from "react-switch"
 import getUsers from "app/users/queries/getUsers"
 import updateUser from "app/users/mutations/updateUser"
 import {
+  OrderButtonWrapper,
   TableBody,
   TableData,
   TableHeader,
@@ -14,6 +14,7 @@ import {
   TableStyled,
   TableWrapper,
 } from "./styles"
+import SwitchComponent from "../SwitchComponent"
 
 interface TableAdminProps {
   data: Record<string, any>[]
@@ -44,16 +45,19 @@ export function TableHeaderDataWithEvent({
     <>
       <TableHeaderData key={key}>{children}</TableHeaderData>
       {sort?.[column] === "asc" ? (
-        <BiUpArrow onClick={handleChangeSort} />
+        <OrderButtonWrapper>
+          <BiUpArrow onClick={handleChangeSort} />
+        </OrderButtonWrapper>
       ) : (
-        <BiDownArrow onClick={handleChangeSort} />
+        <OrderButtonWrapper>
+          <BiDownArrow onClick={handleChangeSort} />
+        </OrderButtonWrapper>
       )}
     </>
   )
 }
 
 export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Element {
-  // TODO: Improve logic of sort and get users
   const translations = {
     name: useGetTextByLng("name"),
     email: useGetTextByLng("email"),
@@ -66,7 +70,13 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
     name: "asc",
   })
   const [updatedUser] = useMutation(updateUser)
-  const [usersFiltered, { refetch }] = useQuery(getUsers, { orderBy: sort })
+  const [usersFiltered, { refetch }] = useQuery(
+    getUsers,
+    { orderBy: sort },
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
 
   useEffect(() => {
     setColumnsFiltered(
@@ -115,7 +125,7 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
               {columnsFiltered.map((column) => (
                 <TableData title={String(rest[column] || "")} key={column}>
                   {column === "active" ? (
-                    <Switch
+                    <SwitchComponent
                       onChange={async (e) => {
                         await handleActivate(id, e)
                       }}

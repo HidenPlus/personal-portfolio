@@ -19,3 +19,8 @@ jobs:
           install: npm install
           build: npm run build
           start: npm run cy:ci
+        env:
+          DATABASE_URL: postgresql://postgres:FU8kKSijLeVbDgCqIXPG@containers-us-west-77.railway.app:5958/railway
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: FU8kKSijLeVbDgCqIXPG
+          POSTGRES_DB: railway
