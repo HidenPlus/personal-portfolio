@@ -27,3 +27,33 @@ describe("Home Page Testing Spanish", () => {
     })
   })
 })
+
+describe("Home Page Testing English", () => {
+  beforeEach(() => {
+    cy.visit("/en")
+  })
+
+  it("Has h1 and text", () => {
+    cy.get("h1").should(($h1) => {
+      expect($h1).to.contain("Hi, my name is")
+    })
+  })
+
+  it("Has h2 and text", () => {
+    cy.get("h2").should(($h2) => {
+      expect($h2).to.contain("Yojhan Atuesta")
+    })
+  })
+
+  it("Has h3 and text", () => {
+    cy.get("h3").should(($h3) => {
+      expect($h3).to.contain("I build ideas, through code")
+    })
+  })
+
+  it("Has description(p) and text", () => {
+    cy.get("p").should(($p) => {
+      expect($p).to.contain("I am a software developer dedicated to understanding the needs ")
+    })
+  })
+})

@@ -1,32 +1,41 @@
-import { useSession } from "@blitzjs/auth"
 import { LoginForm } from "app/auth/components/LoginForm"
+import { alertDialogAtom } from "app/core/AlertDialog/store"
 import { Layout } from "app/projects/components/Layout"
 import { FORM_ERROR } from "final-form"
+import { useAtom } from "jotai"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
 
-function LoginPage() {
+function LoginPage(): JSX.Element {
   const router = useRouter()
-  const session = useSession()
-  // This it´s not necessary but... i´ll use it for now
-  useEffect(() => {
-    if (session.userId) {
-      router.push("/auth")
-    }
-  }, [session])
+  const [, setAlertDialog]: any = useAtom(alertDialogAtom)
   return (
     <Layout title="Admin Login Panel" description="Login Panel">
       <LoginForm
-        onSuccess={() => router.replace("/auth")}
+        onSuccess={() => router.replace("/auth/admin/users")}
         onError={(error) => {
           console.log(error)
-          alert(error[FORM_ERROR])
+          // alert(error[FORM_ERROR])
+          setAlertDialog({
+            visible: true,
+            title: "Error",
+            message: error[FORM_ERROR],
+            buttons: [
+              {
+                text: "Ok",
+                onClick: () => {
+                  setAlertDialog({ visible: false })
+                },
+              },
+            ],
+            timeout: 5000,
+            type: "error",
+          })
         }}
       />
     </Layout>
   )
 }
 
-LoginPage.redirectAuthenticatedTo = "/auth"
+LoginPage.redirectAuthenticatedTo = "/auth/admin/users"
 
 export default LoginPage

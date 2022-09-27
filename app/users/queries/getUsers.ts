@@ -2,16 +2,9 @@
 import { resolver } from "@blitzjs/rpc"
 import { NotFoundError } from "blitz"
 import db from "db"
-import { z } from "zod"
 
-const GetUsers = z.object({
-  where: z.object({
-    active: z.boolean(),
-  }),
-})
-
-export default resolver.pipe(resolver.zod(GetUsers), async ({ where }) => {
-  const user = await db.user.findMany({ where })
+export default resolver.pipe(resolver.authorize(), async ({ orderBy }) => {
+  const user = await db.user.findMany({ orderBy })
 
   if (!user) {
     throw new NotFoundError()

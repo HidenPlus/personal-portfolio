@@ -12,6 +12,7 @@ export const es = {
   errorInvalidEmail: "Correo electrónico inválido",
   errorInvalidPassword: "Contraseña inválida, debe tener al menos 6 caracteres",
   errorUserDoesntExist: "El usuario buscado por este correo electrónico no existe",
+  errorAuth: "Lo siento, estas credenciales no son válidas",
   // auth
   authLogin: "Iniciar sesión",
   authSignUp: "Registrarse",

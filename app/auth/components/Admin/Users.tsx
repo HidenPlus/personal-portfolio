@@ -10,7 +10,7 @@ import { UsersLayout } from "./styles"
 export default function Users(): JSX.Element {
   const router = useRouter()
   const session = useSession()
-  const [users] = useQuery(getUsers, { where: { active: true } })
+  const [users] = useQuery(getUsers, { orderBy: { email: "asc" } })
   useEffect(() => {
     if (!session.userId) {
       router
@@ -25,8 +25,9 @@ export default function Users(): JSX.Element {
       <TableAdmin columns={Object.keys(users[0] || {})} data={users} />
       <Actions>
         <button
-          onClick={() => {
-            router.push("/auth/admin/users/create")
+          type="button"
+          onClick={async () => {
+            await router.push("/auth/admin/users/create")
           }}
         >
           Create

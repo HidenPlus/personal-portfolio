@@ -39,6 +39,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     userNotExist: useGetTextByLng("errorUserDoesntExist"),
     emailInvalid: useGetTextByLng("errorInvalidEmail"),
     passwordInvalid: useGetTextByLng("errorInvalidPassword"),
+    errorAuth: useGetTextByLng("errorAuth"),
   }
   const [loginMutation, { isLoading: loadingLogin }] = useMutation(login)
   const router = useRouter()
@@ -91,7 +92,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     } catch (error: any) {
       if (error instanceof AuthenticationError) {
         return props.onError?.({
-          [FORM_ERROR]: error.message || "Sorry, those credentials are invalid",
+          [FORM_ERROR]: translations.errorAuth,
         })
       }
       if (error instanceof ZodError) {
@@ -142,6 +143,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
           name="email"
           label={translations.email}
           placeholder={translations.email}
+          type="email"
         />
         <LabeledTextField
           onChange={handleChangeInput}

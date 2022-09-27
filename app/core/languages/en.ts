@@ -12,6 +12,7 @@ export const en = {
   errorInvalidEmail: "Invalid email",
   errorInvalidPassword: "Invalid password, must be min 6 length character",
   errorUserDoesntExist: "The user searched for this email does not exist",
+  errorAuth: "Sorry, these credentials are not valid",
   // auth
   authLogin: "Login",
   authSignUp: "Sign Up",
