@@ -25,4 +25,3 @@ jobs:
           POSTGRES_PASSWORD: FU8kKSijLeVbDgCqIXPG
           POSTGRES_DB: railway
           SESSION_SECRET_KEY: aScyyUnQBsXrrQPATV570QTQoHE3WYf2
-          NODE_ENV: production
