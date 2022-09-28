@@ -12,6 +12,7 @@ import { useWindowSize } from "app/core/hooks/useWindowSize"
 import { useRouter } from "next/router"
 import NavBarAuth from "app/auth/components/NavBarAuth"
 import AlertDialog from "app/core/AlertDialog"
+import ModalComponent from "app/core/components/ModalComponent"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -83,6 +84,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <GlobalStyles />
+        <ModalComponent />
         <AlertDialog />
         <NavBarAdmin />
         <PageWrapper>
@@ -99,6 +101,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <GlobalStyles />
+        <ModalComponent />
         <AlertDialog />
         <NavBar />
         <PageWrapper>
@@ -113,6 +116,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary FallbackComponent={RootErrorFallback}>
       <GlobalStyles />
+      <ModalComponent />
       <AlertDialog />
       <NavBar />
       <PageWrapper>
