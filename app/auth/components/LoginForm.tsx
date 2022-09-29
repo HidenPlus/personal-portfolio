@@ -22,14 +22,16 @@ import { ImCross } from "react-icons/im"
 import { useGetTextByLng } from "app/core/hooks/useGetTextByLng"
 import LoaderSpinner, { Colors } from "app/core/components/LoaderSpinner"
 import { useRouter } from "next/router"
+import { useAtom } from "jotai"
 import { Login } from "../validations"
+import { loadingBar } from "./LoadingBar/store"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
   onError?: (error: any) => void
 }
 
-export function LoginForm({ ...props }: LoginFormProps) {
+export function LoginForm({ ...props }: LoginFormProps): JSX.Element {
   const translations = {
     login: useGetTextByLng("authLogin"),
     email: useGetTextByLng("authEmail"),
@@ -42,6 +44,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     errorAuth: useGetTextByLng("errorAuth"),
     userInactive: useGetTextByLng("errorUserInactive"),
   }
+  const [, setLoadingBar] = useAtom(loadingBar)
   const [loginMutation, { isLoading: loadingLogin }] = useMutation(login)
   const router = useRouter()
   const [validForm, setValidForm] = useState(false)
@@ -55,7 +58,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
   })
 
   useEffect(() => {
-    const moveCursor = (e) => {
+    const moveCursor = (e): void => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
     }
@@ -65,7 +68,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
     }
   }, [])
 
-  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     const { name, value } = e.target
     setLoginForm({ ...loginForm, [name]: value })
     if (Login.safeParse(loginForm).success) {
@@ -76,7 +79,6 @@ export function LoginForm({ ...props }: LoginFormProps) {
         Login.parse(loginForm)
       } catch (error) {
         if (error instanceof ZodError) {
-          console.log(error.issues)
           setErrorMessage(error.issues.map((issue) => issue.message).join(". "))
         }
         setValidForm(false)
@@ -87,11 +89,14 @@ export function LoginForm({ ...props }: LoginFormProps) {
   // eslint-disable-next-line consistent-return
   const handleLogin = async (): Promise<any> => {
     try {
+      setLoadingBar(true)
       const userSanitized = Login.parse(loginForm)
       const user = await loginMutation(userSanitized)
       props.onSuccess?.(user)
+      setLoadingBar(false)
     } catch (error: any) {
       console.log(error)
+      setLoadingBar(false)
       if (error instanceof AuthenticationError) {
         return props.onError?.({
           [FORM_ERROR]:

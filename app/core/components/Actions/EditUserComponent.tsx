@@ -51,7 +51,7 @@ export default function EditUserComponent({
         label={translations.role}
         placeholder={translations.role}
         value={formUpdateData.role}
-        type="role"
+        type="text"
       />
     </>
   )

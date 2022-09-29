@@ -7,6 +7,7 @@ import getUsers from "app/users/queries/getUsers"
 import updateUser from "app/users/mutations/updateUser"
 import { useAtom } from "jotai"
 import { LoginButton } from "app/projects/components/Login/styles"
+import { loadingBar } from "app/auth/components/LoadingBar/store"
 import {
   CancelButton,
   OrderButtonWrapper,
@@ -80,6 +81,7 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
     update: useGetTextByLng("update"),
     cancel: useGetTextByLng("cancel"),
   }
+  const [, setLoadingBar] = useAtom(loadingBar)
   const [columnsFiltered, setColumnsFiltered] = useState<string[]>([])
   const [updateUserForm, setUpdateUserForm] = useState<any>({})
   const [handleOpenModal, setHandleOpenModal] = useState(false)
@@ -99,8 +101,10 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
   )
 
   const handleUpdateUser = async (): Promise<void> => {
+    setLoadingBar(true)
     await updateUserMutation(updateUserForm)
     await refetch()
+    setLoadingBar(false)
   }
 
   const UpdateButtonElement = !isLoading ? (
@@ -140,10 +144,6 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
       )
     )
   }, [columns])
-
-  useEffect(() => {
-    console.log(modalContent)
-  }, [modalContent])
 
   useEffect(() => {
     const filter = data.filter((item) => {

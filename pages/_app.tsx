@@ -13,6 +13,7 @@ import { useRouter } from "next/router"
 import NavBarAuth from "app/auth/components/NavBarAuth"
 import AlertDialog from "app/core/AlertDialog"
 import ModalComponent from "app/core/components/ModalComponent"
+import LoadingBar from "app/auth/components/LoadingBar"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -84,6 +85,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <GlobalStyles />
+        <LoadingBar />
         <ModalComponent />
         <AlertDialog />
         <NavBarAdmin />
@@ -101,6 +103,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <GlobalStyles />
+        <LoadingBar />
         <ModalComponent />
         <AlertDialog />
         <NavBar />
@@ -116,6 +119,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary FallbackComponent={RootErrorFallback}>
       <GlobalStyles />
+      <LoadingBar />
       <ModalComponent />
       <AlertDialog />
       <NavBar />
