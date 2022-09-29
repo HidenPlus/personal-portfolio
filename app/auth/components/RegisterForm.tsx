@@ -160,7 +160,7 @@ export function RegisterForm({ ...props }: RegisterFormProps) {
           transition={{ duration: 0.7 }}
         >
           {!loadingLogin ? (
-            <LoginButton role="button" onClick={handleLogin}>
+            <LoginButton role="button" id="register-form-button" onClick={handleLogin}>
               {translations.signup}
             </LoginButton>
           ) : (

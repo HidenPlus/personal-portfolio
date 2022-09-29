@@ -25,4 +25,10 @@ export const ActionButton = styled.button`
   &:hover {
     background-color: var(--color-secondary);
   }
+  &:disabled,
+  &[disabled] {
+    background-color: var(--dark-slate);
+    cursor: not-allowed;
+    color: var(--slate);
+  }
 `

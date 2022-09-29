@@ -2,7 +2,7 @@ import { resolver } from "@blitzjs/rpc"
 import db from "db"
 import { z } from "zod"
 
-const UpdateUser = z.object({
+export const UpdateUser = z.object({
   id: z.number(),
   name: z.string().optional(),
   email: z.string().optional(),

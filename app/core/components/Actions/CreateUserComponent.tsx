@@ -1,10 +1,8 @@
-import { ModalContent } from "../ModalComponent/styles"
-
-export default function CreateUserComponent() {
+export default function CreateUserComponent(): JSX.Element {
   return (
-    <ModalContent>
+    <>
       <h1>Modal Content</h1>
       <p>XD</p>
-    </ModalContent>
+    </>
   )
 }

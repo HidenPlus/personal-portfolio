@@ -10,7 +10,7 @@ describe("Check register process", () => {
     const random = Math.floor(Math.random() * 100000)
     cy.get('input[type="email"').type(`testingregister${random}@hotmail.com`)
     cy.get('input[type="password"').type("testingregister")
-    cy.get('div[role="button"').click()
+    cy.get("#register-form-button").click()
     cy.wait(3000)
     cy.url().should("include", "http://localhost:3000/")
   })

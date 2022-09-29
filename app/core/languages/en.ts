@@ -58,4 +58,7 @@ export const en = {
   email: "Email",
   role: "Role",
   active: "Active",
+  editUser: "Edit user",
+  update: "Update",
+  cancel: "Cancel",
 }

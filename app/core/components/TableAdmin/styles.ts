@@ -94,3 +94,26 @@ export const OrderButtonWrapper = styled.div`
   align-items: center;
   cursor: pointer;
 `
+
+export const CancelButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 40px;
+  background-color: var(--slate);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+  &:hover,
+  &:focus {
+    background-color: var(--dark-green);
+  }
+`

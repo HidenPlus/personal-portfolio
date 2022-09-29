@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useGetTextByLng } from "app/core/hooks/useGetTextByLng"
 import { BiDownArrow, BiUpArrow } from "react-icons/bi"
 import { useEffect, useState } from "react"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import getUsers from "app/users/queries/getUsers"
 import updateUser from "app/users/mutations/updateUser"
+import { useAtom } from "jotai"
+import { LoginButton } from "app/projects/components/Login/styles"
 import {
+  CancelButton,
   OrderButtonWrapper,
   TableBody,
   TableData,
@@ -15,6 +19,15 @@ import {
   TableWrapper,
 } from "./styles"
 import SwitchComponent from "../SwitchComponent"
+import { modalContent as modalContentAtom } from "../ModalComponent/store"
+import EditUserComponent from "../Actions/EditUserComponent"
+import LoaderSpinnerFooter from "./LoaderSpinnerFooter"
+
+export enum Colors {
+  primary = "var(--color-primary)",
+  secondary = "var(--color-secondary)",
+  white = "var(--white)",
+}
 
 interface TableAdminProps {
   data: Record<string, any>[]
@@ -63,8 +76,15 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
     email: useGetTextByLng("email"),
     role: useGetTextByLng("role"),
     active: useGetTextByLng("active"),
+    edit: useGetTextByLng("editUser"),
+    update: useGetTextByLng("update"),
+    cancel: useGetTextByLng("cancel"),
   }
   const [columnsFiltered, setColumnsFiltered] = useState<string[]>([])
+  const [updateUserForm, setUpdateUserForm] = useState<any>({})
+  const [handleOpenModal, setHandleOpenModal] = useState(false)
+  const [modalContent, setModalContent] = useAtom(modalContentAtom)
+  const [updateUserMutation, { isLoading }] = useMutation(updateUser)
   const [dataFiltered, setDataFiltered] = useState<Record<string, any>[]>([])
   const [sort, setSort] = useState<Record<string, "asc" | "desc">>({
     name: "asc",
@@ -76,6 +96,37 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
     {
       refetchOnWindowFocus: false,
     }
+  )
+
+  const handleUpdateUser = async (): Promise<void> => {
+    await updateUserMutation(updateUserForm)
+    await refetch()
+  }
+
+  const UpdateButtonElement = !isLoading ? (
+    <LoginButton
+      key={translations.update}
+      style={{ minWidth: "70px", maxWidth: "70px" }}
+      id="update-form-button"
+      role="button"
+      onClick={handleUpdateUser}
+    >
+      {translations.update}
+    </LoginButton>
+  ) : (
+    <LoaderSpinnerFooter color={Colors.secondary} />
+  )
+
+  const CancelButtonElement = (
+    <CancelButton
+      key={translations.cancel}
+      style={{ minWidth: "70px", maxWidth: "70px" }}
+      id="cancel-form-button"
+      role="button"
+      onClick={(): void => setModalContent({ ...modalContent, visible: false })}
+    >
+      {translations.cancel}
+    </CancelButton>
   )
 
   useEffect(() => {
@@ -91,6 +142,10 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
   }, [columns])
 
   useEffect(() => {
+    console.log(modalContent)
+  }, [modalContent])
+
+  useEffect(() => {
     const filter = data.filter((item) => {
       const { id, updatedAt, createdAt, hashedPassword, ...rest } = item
       return rest
@@ -102,9 +157,49 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
     setDataFiltered(usersFiltered)
   }, [usersFiltered])
 
+  useEffect(() => {
+    if (updateUserForm.id) {
+      setModalContent({
+        visible: true,
+        title: translations.edit,
+        children: (
+          <EditUserComponent
+            formUpdateData={updateUserForm}
+            setFormUpdateData={setUpdateUserForm}
+          />
+        ),
+        actions: [
+          {
+            text: "Cancel",
+            onClick: () => {
+              setModalContent({ ...modalContent, visible: false })
+            },
+            element: CancelButtonElement,
+          },
+          {
+            text: "Update",
+            onClick: () => {
+              setModalContent({ ...modalContent, visible: false })
+            },
+            element: UpdateButtonElement,
+          },
+        ],
+      })
+    }
+  }, [updateUserForm, isLoading, handleOpenModal])
+
   const handleActivate = async (id: number, active: boolean): Promise<void> => {
     await updatedUser({ active, id })
     await refetch()
+  }
+
+  const handleModalEdit = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number): void => {
+    if (e.target === e.currentTarget) {
+      const user = dataFiltered.find((item) => item.id === id)
+      setUpdateUserForm(user)
+      // TODO: Fix this bug, the modal open only one time and then it doesn't open again, fixed temporally with handleOpenModal
+      setHandleOpenModal(!handleOpenModal)
+    }
   }
 
   return (
@@ -123,9 +218,14 @@ export default function TableAdmin({ data, columns }: TableAdminProps): JSX.Elem
           {dataFiltered.map(({ id, updatedAt, createdAt, hashedPassword, ...rest }) => (
             <TableRow key={id}>
               {columnsFiltered.map((column) => (
-                <TableData title={String(rest[column] || "")} key={column}>
+                <TableData
+                  onClick={(e) => handleModalEdit(e, id)}
+                  title={String(rest[column] || "")}
+                  key={column}
+                >
                   {column === "active" ? (
                     <SwitchComponent
+                      switchEmail={rest.email}
                       onChange={async (e) => {
                         await handleActivate(id, e)
                       }}

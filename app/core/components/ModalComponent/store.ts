@@ -1,8 +1,14 @@
 import { atom } from "jotai"
 
+type ActionsType = {
+  text: string
+  onClick: () => void
+  element: JSX.Element
+}
+
 export type ModalContentType = {
   title: string
-  actions: JSX.Element[] | never[]
+  actions: ActionsType[] | []
   children: JSX.Element | null
   visible: boolean
 }

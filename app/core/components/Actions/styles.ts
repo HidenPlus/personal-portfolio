@@ -12,12 +12,13 @@ export const ActionsWrapper = styled.div`
 
 export const ActionsStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   border-collapse: collapse;
+  gap: 20px;
   padding: 20px;
   border: 1px solid var(--color-primary);
   border-radius: 15px;

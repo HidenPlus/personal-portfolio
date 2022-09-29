@@ -161,7 +161,7 @@ export function LoginForm({ ...props }: LoginFormProps) {
           transition={{ duration: 0.7 }}
         >
           {!loadingLogin ? (
-            <LoginButton role="button" onClick={handleLogin}>
+            <LoginButton id="login-form-button" role="button" onClick={handleLogin}>
               {translations.login}
             </LoginButton>
           ) : (
